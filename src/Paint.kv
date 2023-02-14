@@ -8,6 +8,12 @@
     on_release: app.set_draw_method(self.method)
 
 
+<Tool@MDLabel>
+    shorten_from: 'right'
+    shorten: True
+    adaptive_height: True
+
+
 <ToolTextInput@TextInput>
     size_hint: None, None
     multiline: False
@@ -18,11 +24,11 @@
 
 
 <Toolbar>
-    adaptive_height: True
     md_bg_color: app.theme_cls.primary_color[:3] + [0.5]
 
     MDBoxLayout:
         padding: [dp(5), dp(5), dp(5), dp(5)]
+        spacing: dp(8)
 
         ToolsBox:
             ToolButton:
@@ -54,16 +60,17 @@
 
         MDBoxLayout:
             orientation: 'vertical'
-            spacing: dp(2)
-            adaptive_width: True
+            spacing: dp(24) + width_lbl.height
+            adaptive_size: True
 
             MDBoxLayout:
                 orientation: 'vertical'
-                adaptive_width: True
+                size_hint_x: None
+                width: dp(60)
 
-                MDLabel:
-                    text: 'width'
-                    adaptive_height: True
+                Tool:
+                    id: width_lbl
+                    text: 'Width'
 
                 ToolTextInput:
                     id: line_width
@@ -74,11 +81,11 @@
 
             MDBoxLayout:
                 orientation: 'vertical'
-                adaptive_width: True
+                size_hint_x: None
+                width: dp(60)
 
-                MDLabel:
+                Tool:
                     text: 'Radius'
-                    adaptive_height: True
 
                 ToolTextInput:
                     id: circle_radius
@@ -100,6 +107,8 @@ MDBoxLayout:
     orientation: 'vertical'
 
     Toolbar:
+        size_hint_y: None
+        height: dp(95)
 
     PaintWidget:
         id: painter
