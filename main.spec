@@ -1,12 +1,22 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+import os
+import platform
 
 block_cipher = None
 
-data = [('logo.png', '.'), ('logo.ico', '.'), ('Paint.kv', '.')]
+data = [(os.path.join('src', 'data', 'logo.png'), '.'),
+        (os.path.join('src', 'data', 'logo.ico'), '.'),
+        (os.path.join('src', 'Paint.kv'), '.'),
+        ]
+
+if platform.system() == 'Windows':
+    icon=os.path.join('src', 'data', 'logo.ico')
+else:
+    icon=os.path.join('src', 'data', 'logo.png')
 
 a = Analysis(
-    ['main.py'],
+    [os.path.join('src', 'main.py')],
     pathex=[],
     binaries=[],
     datas=data,
@@ -38,7 +48,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='logo.ico',
+    icon=icon,
 )
 
 coll = COLLECT(
