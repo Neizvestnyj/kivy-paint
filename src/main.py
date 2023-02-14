@@ -1,6 +1,7 @@
 from kivy.config import Config
+import os
 
-Config.set('kivy', 'window_icon', 'logo.ico')  # NOQA
+Config.set('kivy', 'window_icon', os.path.join('data', 'logo.ico'))  # NOQA
 Config.set('input', 'mouse', 'mouse,disable_multitouch')  # NOQA
 Config.set('kivy', 'exit_on_escape', 0)  # NOQA
 
@@ -127,7 +128,7 @@ class PaintWidget(MDWidget):
 class PaintApp(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.icon = 'logo.png'
+        self.icon = os.path.join('data', 'logo.png')
         Window.maximize()
 
         self.color_picker = None
