@@ -1,0 +1,105 @@
+<ToolsBox@MDBoxLayout>
+    orientation: 'vertical'
+    adaptive_size: True
+
+
+<ToolButton@MDIconButton>
+    icon_size: '18sp'
+    on_release: app.set_draw_method(self.method)
+
+
+<ToolTextInput@TextInput>
+    size_hint: None, None
+    multiline: False
+    write_tab: False
+    width: dp(48)
+    height: dp(24)
+    font_size: sp(10)
+
+
+<Toolbar>
+    adaptive_height: True
+    md_bg_color: app.theme_cls.primary_color[:3] + [0.5]
+
+    MDBoxLayout:
+        padding: [dp(5), dp(5), dp(5), dp(5)]
+
+        ToolsBox:
+            ToolButton:
+                icon: 'pencil'
+                method: 'line'
+
+            ToolButton:
+                icon: 'circle-outline'
+                method: 'circle'
+
+        ToolsBox:
+            ToolButton:
+                icon: 'square-outline'
+                method: 'square'
+
+            ToolButton:
+                icon: 'circle'
+                method: 'point'
+
+        ToolsBox:
+            ToolButton:
+                icon: 'format-color-fill'
+                method: 'fill'
+
+            MDIconButton:
+                icon: 'palette'
+                icon_size: '18sp'
+                on_release: app.open_color_picker()
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: dp(2)
+            adaptive_width: True
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                adaptive_width: True
+
+                MDLabel:
+                    text: 'width'
+                    adaptive_height: True
+
+                ToolTextInput:
+                    id: line_width
+                    text: '3'
+                    on_text_validate: app.set_line_width(self.text)
+                    on_focus: app.set_line_width(self.text)
+
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                adaptive_width: True
+
+                MDLabel:
+                    text: 'Radius'
+                    adaptive_height: True
+
+                ToolTextInput:
+                    id: circle_radius
+                    text: '10'
+                    on_text_validate: app.set_circle_radius(self.text)
+                    on_focus: app.set_circle_radius(self.text)
+
+        AnchorLayout:
+            id: refresh_btn_anchor
+            anchor_x: "right"
+            anchor_y: "bottom"
+
+            MDFloatingActionButton:
+                icon: 'broom'
+                size_hint: None, None
+                on_release: app.clear_canvas()
+
+MDBoxLayout:
+    orientation: 'vertical'
+
+    Toolbar:
+
+    PaintWidget:
+        id: painter
